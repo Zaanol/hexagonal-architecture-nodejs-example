@@ -1,7 +1,7 @@
-import { UserRepository } from '../../infrastructure/repositories/userRepository';
-import { UserDTO } from '../dtos/userDTO';
-import { User } from '../../domain/models/user';
-import { validateUser } from '../validators/userValidator';
+import {UserRepository} from '../../infrastructure/repositories/userRepository';
+import {UserDTO} from '../dtos/userDTO';
+import {User} from '../../domain/models/user';
+import {validateUser} from '../validators/userValidator';
 
 export class UserService {
     private userRepository: UserRepository;
@@ -19,9 +19,7 @@ export class UserService {
         return await this.userRepository.createUser(userDTO);
     }
 
-    public async getUserById(userId: string): Promise<User | null> {
-        const user = await this.userRepository.findUserById(userId);
-
-        return user;
+    public async getUserById(id: string): Promise<User | null> {
+        return await this.userRepository.findUserById(id);
     }
 }

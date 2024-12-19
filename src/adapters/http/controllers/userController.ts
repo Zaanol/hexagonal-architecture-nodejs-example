@@ -6,9 +6,12 @@ export class UserController {
 
     constructor(userService: UserService) {
         this.userService = userService;
+        this.createUser = this.createUser.bind(this);
+        this.getUser = this.getUser.bind(this);
     }
 
     public async createUser(req: Request, res: Response, next): Promise<void> {
+        console.log(req.body);
         try {
             const newUser = await this.userService.createUser(req.body);
 
@@ -20,17 +23,15 @@ export class UserController {
 
     public async getUser(req: Request, res: Response, next): Promise<void> {
         try {
-            const userId = (req as any).user.userId; // Supondo que o ID do usuário foi incluído no token JWT durante a autenticação
+            const id = (req as any).user.userId;
 
-            // Chamar o serviço para obter informações do usuário pelo ID
-            const user = await this.userService.getUserById(userId);
+            const user = await this.userService.getUserById(id);
 
             if (!user) {
                 res.status(404).json({ error: 'User not found' });
                 return;
             }
 
-            // Retornar as informações do usuário para o cliente
             res.json(user);
         } catch (error) {
             next(error);

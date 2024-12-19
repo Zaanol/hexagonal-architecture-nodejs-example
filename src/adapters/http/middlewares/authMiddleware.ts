@@ -4,7 +4,7 @@ import { verifyToken, generateToken } from '../../../infrastructure/security/jwt
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
-    console.log(generateToken({ userId: '1' }));
+    console.log(generateToken({ userId: '67637a51b61910b324d7ee00' }));
 
     if (authHeader) {
         const token = authHeader.split(' ')[1];

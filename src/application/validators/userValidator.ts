@@ -21,6 +21,5 @@ export const validateUser = (user: UserDTO): string | null => {
 };
 
 const isValidEmail = (email: string): boolean => {
-    // Implemente sua lógica de validação de email aqui, como regex ou uso de bibliotecas
     return /\S+@\S+\.\S+/.test(email);
 };

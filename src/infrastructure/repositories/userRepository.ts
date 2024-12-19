@@ -2,6 +2,7 @@ import { Model } from 'mongoose';
 import { User } from '../../domain/models/user';
 import userModel from '../../domain/models/user';
 import { UserDTO } from '../../application/dtos/userDTO';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface IUserRepository {
     createUser(user: User): Promise<User>;
@@ -17,6 +18,7 @@ export class UserRepository implements IUserRepository {
 
     public async createUser(userDTO: UserDTO): Promise<User> {
         const newUser = new this.userModel({
+            uuid: uuidv4(),
             username: userDTO.username,
             email: userDTO.email,
             password: userDTO.password
@@ -25,8 +27,8 @@ export class UserRepository implements IUserRepository {
         return await newUser.save();
     }
 
-    public async findUserById(userId: string): Promise<User | null> {
-        return await this.userModel.findById(userId).exec();
+    public async findUserById(id: string): Promise<User | null> {
+        return await this.userModel.findOne({ id }).exec();
     }
 }
 

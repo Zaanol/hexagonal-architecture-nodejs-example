@@ -7,7 +7,12 @@ export const handleErrors = (
     next: NextFunction
 ) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Internal Server Error' });
+
+    if (err instanceof Error && err.message) {
+        res.status(400).json({ message: err.message });
+    } else {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 };
 
 export const handleNotFound = (
