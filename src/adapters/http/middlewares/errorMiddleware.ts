@@ -11,7 +11,7 @@ export const handleErrors = (
     if (err instanceof Error && err.message) {
         res.status(400).json({ message: err.message });
     } else {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: req.t('error.internal_server_error') });
     }
 };
 
@@ -20,7 +20,7 @@ export const handleNotFound = (
     res: Response,
     next: NextFunction
 ) => {
-    res.status(404).json({ message: 'Route not found' });
+    res.status(404).json({ message: req.t('error.not_found') });
 };
 
 export const applyErrorMiddleware = (app: express.Application) => {

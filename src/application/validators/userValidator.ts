@@ -1,24 +1,50 @@
 import { UserDTO } from '../dtos/userDTO';
+import { LoginDTO } from "../dtos/loginDTO";
 
+//TODO This code must to be improved
 export const validateUser = (user: UserDTO): string | null => {
-    if (!user.username || user.username.trim() === '') {
-        return 'Username is required';
+    const { username, email, password } = user;
+
+    if (isEmpty(username)) {
+        return 'username.nonNull';
     }
 
-    if (!user.email || user.email.trim() === '') {
-        return 'Email is required';
+    if (isEmpty(email)) {
+        return 'email.nonNull';
     }
 
     if (!isValidEmail(user.email)) {
-        return 'Invalid email format';
+        return 'email.invalid';
     }
 
-    if (!user.password || user.password.trim() === '') {
-        return 'Password is required';
+    if (isEmpty(password)) {
+        return 'password.nonNull';
     }
 
     return null;
 };
+
+export const validateLogin = (login: LoginDTO): string | null => {
+    const { email, password } = login;
+
+    if (isEmpty(email)) {
+        return 'email.nonNull';
+    }
+
+    if (!isValidEmail(login.email)) {
+        return 'email.invalid';
+    }
+
+    if (isEmpty(password)) {
+        return 'password.nonNull';
+    }
+
+    return null;
+};
+
+const isEmpty = (text: string): boolean => {
+    return !text || text.trim() === '';
+}
 
 const isValidEmail = (email: string): boolean => {
     return /\S+@\S+\.\S+/.test(email);

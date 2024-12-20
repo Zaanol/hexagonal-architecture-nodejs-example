@@ -16,8 +16,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "i18next": "^24.1.2",
+    "i18next-fs-backend": "^2.6.0",
+    "i18next-http-middleware": "^3.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.1",
     "uuid": "^11.0.3"

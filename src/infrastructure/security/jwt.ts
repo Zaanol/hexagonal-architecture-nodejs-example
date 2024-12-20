@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from '../../config/config';
+import { TokenDTO } from "../../application/dtos/tokenDTO";
 
-export const generateToken = (payload: any): string => {
-    return jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' });
+export const generateToken = (payload: any): TokenDTO => {
+    return {
+        token: jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' })
+    }
 };
 
 export const verifyToken = (token: string): Promise<any> => {

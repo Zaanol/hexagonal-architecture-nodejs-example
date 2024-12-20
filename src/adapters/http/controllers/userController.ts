@@ -6,14 +6,25 @@ export class UserController {
 
     constructor(userService: UserService) {
         this.userService = userService;
+
+        this.login = this.login.bind(this);
         this.createUser = this.createUser.bind(this);
         this.getUser = this.getUser.bind(this);
     }
 
-    public async createUser(req: Request, res: Response, next): Promise<void> {
-        console.log(req.body);
+    public async login(req: Request, res: Response, next): Promise<void> {
         try {
-            const newUser = await this.userService.createUser(req.body);
+            const token = await this.userService.login(req.body);
+
+            res.status(201).json(token);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public async createUser(req: Request, res: Response, next): Promise<void> {
+        try {
+            const newUser = await this.userService.create(req.body);
 
             res.status(201).json(newUser);
         } catch (error) {
@@ -25,7 +36,7 @@ export class UserController {
         try {
             const id = (req as any).user.userId;
 
-            const user = await this.userService.getUserById(id);
+            const user = await this.userService.getById(id);
 
             if (!user) {
                 res.status(404).json({ error: 'User not found' });
