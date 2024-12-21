@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "Commonjs",
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "./dist",
+    "rootDir": "./",
     "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
@@ -11,7 +11,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "lib": [
       "es6"
@@ -20,11 +21,15 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowUnreachableCode": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "baseUrl": "./",
+    "paths": {
+      "@mocks/*": ["tests/utils/mocks/*"]
+    }
 },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.js"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",

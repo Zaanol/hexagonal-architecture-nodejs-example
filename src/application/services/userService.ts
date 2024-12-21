@@ -38,9 +38,10 @@ export class UserService {
             throw new Error(i18n.t(validationError));
         }
 
-        userDTO.password = await PasswordUtils.hashPassword(userDTO.password);
-
-        return await this.userRepository.createUser(userDTO);
+        return await this.userRepository.createUser({
+            ...userDTO,
+            password: await PasswordUtils.hashPassword(userDTO.password)
+        });
     }
 
     public async getById(id: string): Promise<User | null> {
