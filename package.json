@@ -7,13 +7,13 @@
     "dev": "node --watch -r ts-node/register/transpile-only ./src/main/server.ts",
     "test": "jest --coverage",
     "build": "tsc -b -v",
-    "start": "node ./dist/main/server.js",
+    "start": "node ./dist/src/main/server.js",
     "build_start": "npm run build && npm run start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zanol",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
