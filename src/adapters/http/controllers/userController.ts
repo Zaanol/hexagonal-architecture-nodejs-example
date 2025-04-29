@@ -34,7 +34,7 @@ export class UserController {
 
     public async getUser(req: Request, res: Response, next): Promise<void> {
         try {
-            const id = (req as any).user.userId;
+            const id = (req as any).user.id;
 
             const user = await this.userService.getById(id);
 

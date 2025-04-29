@@ -4,7 +4,7 @@ export const handleErrors = (
     err: any,
     req: Request,
     res: Response,
-    next: NextFunction
+    _next: NextFunction
 ) => {
     console.error(err.stack);
 
@@ -18,7 +18,7 @@ export const handleErrors = (
 export const handleNotFound = (
     req: Request,
     res: Response,
-    next: NextFunction
+    _next: NextFunction
 ) => {
     res.status(404).json({ message: req.t('error.not_found') });
 };

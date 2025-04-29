@@ -20,8 +20,10 @@ const userSchema = new Schema<User>({
 });
 
 userSchema.set('toJSON', {
-    transform: (doc, ret) => {
+    transform: (_doc, ret) => {
         delete ret.password;
+        delete ret._id;
+        delete ret.__v;
         return ret;
     }
 });
